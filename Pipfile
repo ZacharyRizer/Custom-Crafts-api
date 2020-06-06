@@ -12,6 +12,9 @@ psycopg2-binary = "*"
 alembic = "*"
 flask-migrate = "*"
 python-dotenv = "*"
+graphene = "*"
+graphene-sqlalchemy = "*"
+flask-graphql = "*"
 
 [requires]
 python_version = "3.8"

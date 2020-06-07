@@ -3,17 +3,21 @@ from flask_cors import cross_origin, CORS
 from flask_migrate import Migrate
 from .config import Configuration
 from .models import db
-from .routes import customers, ships
 from .auth import AuthError, requires_auth
+from flask_graphql import GraphQLView
+from .schema import schema
+
 
 app = Flask(__name__)
 app.config.from_object(Configuration)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
-app.register_blueprint(customers.bp)
-app.register_blueprint(ships.bp)
 db.init_app(app)
 Migrate(app, db)
+
+
+app.add_url_rule('/graphql', view_func=GraphQLView.as_view('graphql',
+                                                           schema=schema,
+                                                           graphiql=True))
 
 # Error Handler
 
@@ -44,5 +48,6 @@ def public():
 def private():
     response = "Hello from a private endpoint! You need to be authenticated to see this."
     return jsonify(message=response)
+
 
 

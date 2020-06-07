@@ -16,6 +16,9 @@ python-jose = "*"
 flask-cors = "*"
 six = "*"
 sqlalchemy = "*"
+graphene = "*"
+graphene-sqlalchemy = "*"
+flask-graphql = "*"
 
 [requires]
 python_version = "3.8"

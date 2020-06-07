@@ -12,6 +12,10 @@ psycopg2-binary = "*"
 alembic = "*"
 flask-migrate = "*"
 python-dotenv = "*"
+python-jose = "*"
+flask-cors = "*"
+six = "*"
+sqlalchemy = "*"
 
 [requires]
 python_version = "3.8"

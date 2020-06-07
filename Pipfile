@@ -15,6 +15,7 @@ python-dotenv = "*"
 graphene = "*"
 graphene-sqlalchemy = "*"
 flask-graphql = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.8"

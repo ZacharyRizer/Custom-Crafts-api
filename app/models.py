@@ -10,7 +10,7 @@ class Ship(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)
     manufacturer_id = db.Column(db.Integer, db.ForeignKey(
         'manufacturers.id'), nullable=False)
-    type_id = db.Column(db.Integer, db.ForeignKey('types.id'), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
     size = db.Column(db.Integer, nullable=False)
     designer = db.Column(db.String(50), nullable=False)
     crew_cap = db.Column(db.Integer, nullable=False)
@@ -23,7 +23,7 @@ class Ship(db.Model):
     price = db.Column(db.Integer, nullable=False)
 
     manufacturer = db.relationship('Manufacturer', back_populates='ships')
-    type = db.relationship('Type', back_populates='ships')
+    category = db.relationship('Category', back_populates='ships')
     order_items = db.relationship('OrderItem', back_populates='ship')
     reviews = db.relationship('Review', back_populates='ship')
 
@@ -37,13 +37,13 @@ class Manufacturer(db.Model):
     ships = db.relationship('Ship', back_populates='manufacturer')
 
 
-class Type(db.Model):
-    __tablename__ = 'types'
+class Category(db.Model):
+    __tablename__ = 'categories'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
 
-    ships = db.relationship('Ship', back_populates='type')
+    ships = db.relationship('Ship', back_populates='category')
 
 
 class Customer(db.Model):
@@ -52,6 +52,7 @@ class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False, unique=True)
+    auth0_id = db.Column(db.String, unique=True)
 
     orders = db.relationship('Order', back_populates='customer')
     reviews = db.relationship('Review', back_populates='customer')

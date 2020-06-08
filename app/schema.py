@@ -3,6 +3,8 @@ from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyConnectionField, SQLAlchemyObjectType
 
 from .models import db, Customer, Manufacturer, Ship
+from .auth import AuthError, requires_auth
+
 
 # class TestObj(graphene.ObjectType):
 #     title = graphene.String()

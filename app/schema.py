@@ -2,14 +2,9 @@ import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyConnectionField, SQLAlchemyObjectType
 
-from .models import db, Customer, Manufacturer, Ship, Category, Order, OrderItem, Review
+from .models import db, Category, Customer, Manufacturer, Ship, Order, OrderItem, Review
 from .auth import AuthError, requires_auth
 
-
-# class TestObj(graphene.ObjectType):
-#     title = graphene.String()
-#     description = graphene.String()
-#     age = graphene.Int()
 
 class CategoryType(SQLAlchemyObjectType):
     class Meta:

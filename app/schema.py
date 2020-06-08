@@ -143,20 +143,24 @@ class AddCustomer(graphene.Mutation):
     id = graphene.Int()
     name = graphene.String()
     email = graphene.String()
+    auth0_id = graphene.String()
 
     class Arguments:
         name = graphene.String()
         email = graphene.String()
+        auth0_id = graphene.String()
 
-    def mutate(self, info, name, email):
-        customer = Customer(name=name, email=email)
+    @requires_auth
+    def mutate(self, info, name, email, auth0_id):
+        customer = Customer(name=name, email=email, auth0_id=auth0_id)
         db.session.add(customer)
         db.session.commit()
 
         return AddCustomer(
             id=customer.id,
             name=customer.name,
-            email=customer.email
+            email=customer.email,
+            auth0_id=customer.auth0_id
         )
 
 
@@ -173,9 +177,8 @@ class AddOrder(graphene.Mutation):
         db.session.commit()
 
         return AddOrder(
-            id=order.id
-            customer_id=order.customer_id
-        )
+            id=order.id,
+            customer_id=order.customer_id)
 
 
 class AddOrderItem(graphene.Mutation):

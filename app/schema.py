@@ -1,6 +1,7 @@
 import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyConnectionField, SQLAlchemyObjectType
+from sqlalchemy.sql import text
 
 from .models import db, Category, Customer, Manufacturer, Ship, Order, OrderItem, Review
 from .auth import AuthError, requires_auth
@@ -83,7 +84,8 @@ class Query(graphene.ObjectType):
 
     # ships
 
-    ships = graphene.List(ShipType)
+    ships = graphene.Field(graphene.List(ShipType),
+                           selectors=graphene.List(graphene.List(graphene.String)))
     ship = graphene.Field(
         ShipType, ship_id=graphene.Int())
 
@@ -123,8 +125,18 @@ class Query(graphene.ObjectType):
     def resolve_review(self, info, review_id):
         return Review.query.get(review_id)
 
-    def resolve_ships(self, info, **kwargs):
+    def resolve_ships(self, info, selectors, **kwargs):
+        if selectors:
+            filter_string = []
+            for selector in selectors:
+                filter_string.append(f'{selector[0]}={selector[1]}')
+            filter_query = text(' and '.join(filter_string))
+            return Ship.query.filter(filter_query)
+
         return Ship.query.all()
+
+    # def resolve_ships(self, info, **kwargs):
+    #     return Ship.query.all()
 
 # Add **kwargs to all single instance resolvers as well?
     def resolve_ship(self, info, ship_id):
@@ -143,20 +155,24 @@ class AddCustomer(graphene.Mutation):
     id = graphene.Int()
     name = graphene.String()
     email = graphene.String()
+    auth0_id = graphene.String()
 
     class Arguments:
         name = graphene.String()
         email = graphene.String()
+        auth0_id = graphene.String()
 
-    def mutate(self, info, name, email):
-        customer = Customer(name=name, email=email)
-        db.session.add(customer)
+    @requires_auth
+    def mutate(self, info, name, email, auth0_id):
+        customer = Customer(name=name, email=email, auth0_id=auth0_id)
+        db.session.merge(customer)
         db.session.commit()
 
         return AddCustomer(
             id=customer.id,
             name=customer.name,
-            email=customer.email
+            email=customer.email,
+            auth0_id=customer.auth0_id
         )
 
 
@@ -173,9 +189,8 @@ class AddOrder(graphene.Mutation):
         db.session.commit()
 
         return AddOrder(
-            id=order.id
-            customer_id=order.customer_id
-        )
+            id=order.id,
+            customer_id=order.customer_id)
 
 
 class AddOrderItem(graphene.Mutation):

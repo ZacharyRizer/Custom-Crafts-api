@@ -7,12 +7,16 @@ class ShipFilter(FilterSet):
     class Meta:
         model = Ship
         fields = {
-            "id": OPERATIONS,
-            "manufacturer_id": OPERATIONS,
-            "category_id": OPERATIONS,
-            "ftl": OPERATIONS,
-            "used": OPERATIONS,
-        }
+            "id": ['eq'],
+            "category_id": ['eq'],
+            "manufacturer_id": ['eq'],
+            "crew_cap": ['range'],
+            "size": ['range'],
+            "travel_range": ['range'],
+            "price": ['range'],
+            "ftl": ['eq'],
+            "used": ['eq']
+         }
 
 
 class MyFilterableConnectionField(FilterableConnectionField):

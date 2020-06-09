@@ -1,6 +1,7 @@
 import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyConnectionField, SQLAlchemyObjectType
+from sqlalchemy.sql import text
 
 from .models import db, Category, Customer, Manufacturer, Ship, Order, OrderItem, Review
 from .auth import AuthError, requires_auth
@@ -83,7 +84,8 @@ class Query(graphene.ObjectType):
 
     # ships
 
-    ships = graphene.List(ShipType)
+    ships = graphene.Field(graphene.List(ShipType),
+                           selectors=graphene.List(graphene.List(graphene.String)))
     ship = graphene.Field(
         ShipType, ship_id=graphene.Int())
 
@@ -123,8 +125,18 @@ class Query(graphene.ObjectType):
     def resolve_review(self, info, review_id):
         return Review.query.get(review_id)
 
-    def resolve_ships(self, info, **kwargs):
+    def resolve_ships(self, info, selectors, **kwargs):
+        if selectors:
+            filter_string = []
+            for selector in selectors:
+                filter_string.append(f'{selector[0]}={selector[1]}')
+            filter_query = text(' and '.join(filter_string))
+            return Ship.query.filter(filter_query)
+
         return Ship.query.all()
+
+    # def resolve_ships(self, info, **kwargs):
+    #     return Ship.query.all()
 
 # Add **kwargs to all single instance resolvers as well?
     def resolve_ship(self, info, ship_id):
@@ -153,7 +165,7 @@ class AddCustomer(graphene.Mutation):
     @requires_auth
     def mutate(self, info, name, email, auth0_id):
         customer = Customer(name=name, email=email, auth0_id=auth0_id)
-        db.session.add(customer)
+        db.session.merge(customer)
         db.session.commit()
 
         return AddCustomer(

@@ -218,6 +218,36 @@ class AddOrderItem(graphene.Mutation):
         )
 
 
+class DeleteOrder(graphene.Mutation):
+    id = graphene.Int()
+
+    class Arguments:
+        id = graphene.Int()
+
+    def mutate(self, info, id):
+        db.session.delete(Order.query.get(id))
+        db.session.commit()
+
+        return DeleteOrder(id=id)
+
+
+class DeleteOrderItem(graphene.Mutation):
+    id = graphene.Int()
+
+    class Arguments:
+        id = graphene.Int()
+
+    def mutate(self, info, id):
+        db.session.delete(OrderItem.query.get(id))
+        db.session.commit()
+
+        return DeleteOrderItem(id=id)
+
+
+# class UpdateOrderItem(graphene.Mutation):
+#     pass
+
+
 class AddReview(graphene.Mutation):
     id = graphene.Int()
     customer_id = graphene.Int()
@@ -246,9 +276,27 @@ class AddReview(graphene.Mutation):
         )
 
 
+class DeleteReview(graphene.Mutation):
+    id = graphene.Int()
+
+    class Arguments:
+        id = graphene.Int()
+
+    def mutate(self, info, id):
+        db.session.delete(Review.query.get(id))
+        db.session.commit()
+
+        return DeleteReview(id=id)
+
+
 class Mutation(graphene.ObjectType):
     add_customer = AddCustomer.Field()
+    add_order = AddOrder.Field()
+    add_order_item = AddOrderItem.Field()
+    delete_order = DeleteOrder.Field()
+    delete_order_item = DeleteOrderItem.Field()
     add_review = AddReview.Field()
+    delete_review = DeleteReview.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

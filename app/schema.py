@@ -1,99 +1,58 @@
 import graphene
-from graphene import relay
-from graphene_sqlalchemy import SQLAlchemyConnectionField, SQLAlchemyObjectType
-from sqlalchemy.sql import text
+from graphene import Connection, Node, relay
+from graphene_sqlalchemy import SQLAlchemyObjectType
 
+from .filters import MyFilterableConnectionField
 from .models import db, Category, Customer, Manufacturer, Ship, Order, OrderItem, Review
+from .types import CategoryType, CustomerType, ManufacturerType, OrderType, OrderItemType, ReviewType, ShipType
 from .auth import AuthError, requires_auth
 
 
-class CategoryType(SQLAlchemyObjectType):
-    class Meta:
-        model = Category
-        interfaces = (relay.Node, )
-
-
-class CustomerType(SQLAlchemyObjectType):
-    class Meta:
-        model = Customer
-        # Research following line, possibly unnecessary in all _Type Classes.
-        interfaces = (relay.Node, )
-
-
-class ManufacturerType(SQLAlchemyObjectType):
-    class Meta:
-        model = Manufacturer
-        interfaces = (relay.Node, )
-
-
-class OrderType(SQLAlchemyObjectType):
-    class Meta:
-        model = Order
-        interfaces = (relay.Node, )
-
-
-class OrderItemType(SQLAlchemyObjectType):
-    class Meta:
-        model = OrderItem
-        interfaces = (relay.Node, )
-
-
-class ReviewType(SQLAlchemyObjectType):
-    class Meta:
-        model = Review
-        interfaces = (relay.Node, )
-
-
-class ShipType(SQLAlchemyObjectType):
+class ShipNode(SQLAlchemyObjectType):
     class Meta:
         model = Ship
-        interfaces = (relay.Node, )
+        interfaces = (Node,)
+        connection_field_factory = MyFilterableConnectionField.factory
+
+
+class ShipConnection(Connection):
+    class Meta:
+        node = ShipNode
 
 
 class Query(graphene.ObjectType):
     node = relay.Node.Field()
 
-    # categories
-
     categories = graphene.List(CategoryType)
     category = graphene.Field(
         CategoryType, category_id=graphene.Int())
-
-    # manufacturers = SQLAlchemyConnectionField(Manufacturer.connection)
 
     manufacturers = graphene.List(ManufacturerType)
     manufacturer = graphene.Field(
         ManufacturerType, manufacturer_id=graphene.Int())
 
-    # orders
-
     orders = graphene.List(OrderType)
     order = graphene.Field(
         OrderType, order_id=graphene.Int())
-
-    # order-items
 
     order_items = graphene.List(OrderItemType)
     order_item = graphene.Field(
         OrderItemType, order_item_id=graphene.Int())
 
-    # reviews
     reviews = graphene.List(ReviewType)
     review = graphene.Field(
         ReviewType, review_id=graphene.Int())
 
-    # ships
-
-    ships = graphene.Field(graphene.List(ShipType),
-                           selectors=graphene.List(graphene.List(graphene.String)))
+    ships = MyFilterableConnectionField(ShipConnection) # uses filter
     ship = graphene.Field(
         ShipType, ship_id=graphene.Int())
-
-    # customers
 
     customers = graphene.List(CustomerType)
     customer = graphene.Field(
         CustomerType, customer_id=graphene.Int())
+
+    def resolve_ship(self, info, ship_id):
+        return Ship.query.get(ship_id)
 
     def resolve_categories(self, info, **kwargs):
         return Category.query.all()
@@ -125,31 +84,13 @@ class Query(graphene.ObjectType):
     def resolve_review(self, info, review_id):
         return Review.query.get(review_id)
 
-    def resolve_ships(self, info, selectors, **kwargs):
-        if selectors:
-            filter_string = []
-            for selector in selectors:
-                filter_string.append(f'{selector[0]}={selector[1]}')
-            filter_query = text(' and '.join(filter_string))
-            return Ship.query.filter(filter_query)
-
-        return Ship.query.all()
-
-    # def resolve_ships(self, info, **kwargs):
-    #     return Ship.query.all()
-
-# Add **kwargs to all single instance resolvers as well?
-    def resolve_ship(self, info, ship_id):
-        return Ship.query.get(ship_id)
-
     def resolve_customers(self, info, **kwargs):
         return Customer.query.all()
 
     def resolve_customer(self, info, customer_id):
         return Customer.query.get(customer_id)
 
-    # Mutations
-
+# Mutations
 
 class AddCustomer(graphene.Mutation):
     id = graphene.Int()
@@ -300,3 +241,6 @@ class Mutation(graphene.ObjectType):
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
+
+
+

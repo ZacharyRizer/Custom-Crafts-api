@@ -43,7 +43,7 @@ class Query(graphene.ObjectType):
     review = graphene.Field(
         ReviewType, review_id=graphene.Int())
 
-    ships = MyFilterableConnectionField(ShipConnection) # uses filter
+    ships = MyFilterableConnectionField(ShipConnection)  # uses filter
     ship = graphene.Field(
         ShipType, ship_id=graphene.Int())
 
@@ -90,7 +90,9 @@ class Query(graphene.ObjectType):
     def resolve_customer(self, info, customer_id):
         return Customer.query.get(customer_id)
 
+
 # Mutations
+
 
 class AddCustomer(graphene.Mutation):
     id = graphene.Int()
@@ -241,6 +243,4 @@ class Mutation(graphene.ObjectType):
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
-
-
 

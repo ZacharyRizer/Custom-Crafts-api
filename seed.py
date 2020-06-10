@@ -33,7 +33,7 @@ with app.app_context():
         travel_range=15600,
         ftl=True,
         used=False,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship1.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=470000
@@ -48,7 +48,7 @@ with app.app_context():
         travel_range=9500,
         ftl=False,
         used=True,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship2.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=850000
@@ -63,7 +63,7 @@ with app.app_context():
         travel_range=8700,
         ftl=True,
         used=False,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship1.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=150000
@@ -78,7 +78,7 @@ with app.app_context():
         travel_range=850,
         ftl=False,
         used=True,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship2.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=8700
@@ -93,7 +93,7 @@ with app.app_context():
         travel_range=13000,
         ftl=True,
         used=False,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship1.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=954
@@ -108,7 +108,7 @@ with app.app_context():
         travel_range=90,
         ftl=False,
         used=True,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship2.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=657
@@ -123,7 +123,7 @@ with app.app_context():
         travel_range=23,
         ftl=True,
         used=False,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship1.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=75
@@ -138,7 +138,7 @@ with app.app_context():
         travel_range=10,
         ftl=False,
         used=True,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship2.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=67000
@@ -153,7 +153,7 @@ with app.app_context():
         travel_range=5800,
         ftl=True,
         used=False,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship1.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=8900
@@ -168,7 +168,7 @@ with app.app_context():
         travel_range=3500,
         ftl=False,
         used=True,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship2.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=435
@@ -183,7 +183,7 @@ with app.app_context():
         travel_range=4500,
         ftl=True,
         used=False,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship1.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=8700
@@ -198,7 +198,7 @@ with app.app_context():
         travel_range=900,
         ftl=False,
         used=True,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship2.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=96000
@@ -213,7 +213,7 @@ with app.app_context():
         travel_range=5700,
         ftl=True,
         used=False,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship1.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=9000
@@ -228,7 +228,7 @@ with app.app_context():
         travel_range=7500,
         ftl=False,
         used=True,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship2.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=65000
@@ -243,7 +243,7 @@ with app.app_context():
         travel_range=12000,
         ftl=True,
         used=False,
-        model_link='/spaceships/test_ship.glb',
+        model_link='/spaceships/ship1.glb',
         description='Big black circle, causes destruction',
         stock=3,
         price=999999

@@ -10,7 +10,11 @@ class Ship(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)
     manufacturer_id = db.Column(db.String, db.ForeignKey(
         'manufacturers.id'), nullable=False)
+<<<<<<< HEAD
     category_id = db.Column(db.String, db.ForeignKey(
+=======
+    category_id = db.Column(db.Integer, db.ForeignKey(
+>>>>>>> master
         'categories.id'), nullable=False)
     size = db.Column(db.Integer, nullable=False)
     designer = db.Column(db.String(50), nullable=False)

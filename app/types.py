@@ -37,9 +37,4 @@ class OrderItemType(SQLAlchemyObjectType):
 
 class ReviewType(SQLAlchemyObjectType):
     class Meta:
-<<<<<<< HEAD
         model = Review
-        interfaces = (relay.Node, )
-=======
-        model = Review
->>>>>>> master

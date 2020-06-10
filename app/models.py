@@ -8,7 +8,7 @@ class Ship(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)  # autoincrement=True
     name = db.Column(db.String(50), nullable=False, unique=True)
-    manufacturer_id = db.Column(db.String, db.ForeignKey(
+    manufacturer_id = db.Column(db.Integer, db.ForeignKey(
         'manufacturers.id'), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey(
         'categories.id'), nullable=False)
@@ -32,7 +32,7 @@ class Ship(db.Model):
 class Manufacturer(db.Model):
     __tablename__ = 'manufacturers'
 
-    id = db.Column(db.String, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
 
     ships = db.relationship('Ship', back_populates='manufacturer')
@@ -41,7 +41,7 @@ class Manufacturer(db.Model):
 class Category(db.Model):
     __tablename__ = 'categories'
 
-    id = db.Column(db.String, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
 
     ships = db.relationship('Ship', back_populates='category')

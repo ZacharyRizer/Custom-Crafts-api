@@ -25,11 +25,11 @@ class Query(graphene.ObjectType):
 
     categories = graphene.List(CategoryType)
     category = graphene.Field(
-        CategoryType, category_id=graphene.Int())
+        CategoryType, category_id=graphene.String())
 
     manufacturers = graphene.List(ManufacturerType)
     manufacturer = graphene.Field(
-        ManufacturerType, manufacturer_id=graphene.Int())
+        ManufacturerType, manufacturer_id=graphene.String())
 
     orders = graphene.List(OrderType)
     order = graphene.Field(
@@ -243,4 +243,3 @@ class Mutation(graphene.ObjectType):
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)
-

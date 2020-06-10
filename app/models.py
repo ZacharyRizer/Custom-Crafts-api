@@ -10,7 +10,8 @@ class Ship(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)
     manufacturer_id = db.Column(db.Integer, db.ForeignKey(
         'manufacturers.id'), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey(
+        'categories.id'), nullable=False)
     size = db.Column(db.Integer, nullable=False)
     designer = db.Column(db.String(50), nullable=False)
     crew_cap = db.Column(db.Integer, nullable=False)
@@ -94,4 +95,3 @@ class Review(db.Model):
 
     customer = db.relationship('Customer', back_populates='reviews')
     ship = db.relationship('Ship', back_populates='reviews')
-

@@ -1,7 +1,7 @@
 import graphene
 from graphene import Connection, Node, relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
-
+from graphql_relay.node.node import from_global_id
 from .filters import MyFilterableConnectionField
 from .models import db, Category, Customer, Manufacturer, Ship, Order, OrderItem, Review
 from .types import CategoryType, CustomerType, ManufacturerType, OrderType, OrderItemType, ReviewType, ShipType
@@ -24,31 +24,31 @@ class Query(graphene.ObjectType):
 
     categories = graphene.List(CategoryType)
     category = graphene.Field(
-        CategoryType, category_id=graphene.String())
+        CategoryType, category_id=graphene.ID(required=True))
 
     manufacturers = graphene.List(ManufacturerType)
     manufacturer = graphene.Field(
-        ManufacturerType, manufacturer_id=graphene.String())
+        ManufacturerType, manufacturer_id=graphene.ID(required=True))
 
     orders = graphene.List(OrderType)
     order = graphene.Field(
-        OrderType, order_id=graphene.Int())
+        OrderType, order_id=graphene.ID(required=True))
 
     order_items = graphene.List(OrderItemType)
     order_item = graphene.Field(
-        OrderItemType, order_item_id=graphene.Int())
+        OrderItemType, order_item_id=graphene.ID(required=True))
 
     reviews = graphene.List(ReviewType)
     review = graphene.Field(
-        ReviewType, review_id=graphene.Int())
+        ReviewType, review_id=graphene.ID(required=True))
 
     ships = MyFilterableConnectionField(ShipConnection)  # uses filter
     ship = graphene.Field(
-        ShipType, ship_id=graphene.Int())
+        ShipType, ship_id=graphene.ID(required=True))
 
     customers = graphene.List(CustomerType)
     customer = graphene.Field(
-        CustomerType, customer_id=graphene.Int())
+        CustomerType, customer_id=graphene.ID(required=True))
 
     def resolve_ship(self, info, ship_id):
         return Ship.query.get(ship_id)
@@ -94,7 +94,7 @@ class Query(graphene.ObjectType):
 
 
 class AddCustomer(graphene.Mutation):
-    id = graphene.Int()
+    id = graphene.ID(required=True)
     name = graphene.String()
     email = graphene.String()
     auth0_id = graphene.String()
@@ -107,7 +107,7 @@ class AddCustomer(graphene.Mutation):
     @requires_auth
     def mutate(self, info, name, email, auth0_id):
         customer = Customer(name=name, email=email, auth0_id=auth0_id)
-        db.session.merge(customer)
+        db.session.add(customer)
         db.session.commit()
 
         return AddCustomer(
@@ -119,11 +119,11 @@ class AddCustomer(graphene.Mutation):
 
 
 class AddOrder(graphene.Mutation):
-    id = graphene.Int()
-    customer_id = graphene.Int()
+    id = graphene.ID(required=True)
+    customer_id = graphene.ID(required=True)
 
     class Arguments:
-        customer_id = graphene.Int()
+        customer_id = graphene.ID(required=True)
 
     def mutate(self, info, customer_id):
         order = Order(customer_id=customer_id)
@@ -136,14 +136,14 @@ class AddOrder(graphene.Mutation):
 
 
 class AddOrderItem(graphene.Mutation):
-    id = graphene.Int()
-    order_id = graphene.Int()
-    ship_id = graphene.Int()
+    id = graphene.ID(required=True)
+    order_id = graphene.ID(required=True)
+    ship_id = graphene.ID(required=True)
     quantity = graphene.Int()
 
     class Arguments:
-        order_id = graphene.Int()
-        ship_id = graphene.Int()
+        order_id = graphene.ID(required=True)
+        ship_id = graphene.ID(required=True)
         quantity = graphene.Int()
 
     def mutate(self, info, order_id, ship_id, quantity):
@@ -161,10 +161,10 @@ class AddOrderItem(graphene.Mutation):
 
 
 class DeleteOrder(graphene.Mutation):
-    id = graphene.Int()
+    id = graphene.ID(required=True)
 
     class Arguments:
-        id = graphene.Int()
+        id = graphene.ID(required=True)
 
     def mutate(self, info, id):
         db.session.delete(Order.query.get(id))
@@ -174,10 +174,10 @@ class DeleteOrder(graphene.Mutation):
 
 
 class DeleteOrderItem(graphene.Mutation):
-    id = graphene.Int()
+    id = graphene.ID(required=True)
 
     class Arguments:
-        id = graphene.Int()
+        id = graphene.ID(required=True)
 
     def mutate(self, info, id):
         db.session.delete(OrderItem.query.get(id))
@@ -191,15 +191,15 @@ class DeleteOrderItem(graphene.Mutation):
 
 
 class AddReview(graphene.Mutation):
-    id = graphene.Int()
-    customer_id = graphene.Int()
-    ship_id = graphene.Int()
+    id = graphene.ID(required=True)
+    customer_id = graphene.ID(required=True)
+    ship_id = graphene.ID(required=True)
     rating = graphene.Int()
     description = graphene.String()
 
     class Arguments:
-        customer_id = graphene.Int()
-        ship_id = graphene.Int()
+        customer_id = graphene.ID(required=True)
+        ship_id = graphene.ID(required=True)
         rating = graphene.Int()
         description = graphene.String()
 
@@ -219,10 +219,10 @@ class AddReview(graphene.Mutation):
 
 
 class DeleteReview(graphene.Mutation):
-    id = graphene.Int()
+    id = graphene.ID(required=True)
 
     class Arguments:
-        id = graphene.Int()
+        id = graphene.ID(required=True)
 
     def mutate(self, info, id):
         db.session.delete(Review.query.get(id))

@@ -12,21 +12,21 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-    man1 = Manufacturer(id='1', name='Imperial Galactic Government')
-    man2 = Manufacturer(id='2', name='Spacing Guild')
-    man3 = Manufacturer(id='3', name='Corellian Engineering Corporation')
-    man4 = Manufacturer(id='4', name='Cybertronian Technologies')
-    man5 = Manufacturer(id='5', name='Weyland-Yutani Corporation')
-    cat1 = Category(id='1', name='Military')
-    cat2 = Category(id='2', name='Transport')
-    cat3 = Category(id='3', name='Cargo')
-    cat4 = Category(id='4', name='Performance')
-    cat5 = Category(id='5', name='Luxury')
+    man1 = Manufacturer(id=1, name='Imperial Galactic Government')
+    man2 = Manufacturer(id=2, name='Spacing Guild')
+    man3 = Manufacturer(id=3, name='Corellian Engineering Corporation')
+    man4 = Manufacturer(id=4, name='Cybertronian Technologies')
+    man5 = Manufacturer(id=5, name='Weyland-Yutani Corporation')
+    cat1 = Category(id=1, name='Military')
+    cat2 = Category(id=2, name='Transport')
+    cat3 = Category(id=3, name='Cargo')
+    cat4 = Category(id=4, name='Performance')
+    cat5 = Category(id=5, name='Luxury')
 
     ship1 = Ship(
         name='Frontier',
-        manufacturer_id='1',
-        category_id='1',
+        manufacturer_id=1,
+        category_id=1,
         size=8473,
         designer='T\'Maha',
         crew_cap=2500,
@@ -40,8 +40,8 @@ with app.app_context():
     )
     ship2 = Ship(
         name='SS Dreadnought',
-        manufacturer_id='1',
-        category_id='1',
+        manufacturer_id=1,
+        category_id=1,
         size=4788,
         designer='Glama V\'Leeni',
         crew_cap=1000,
@@ -55,8 +55,8 @@ with app.app_context():
     )
     ship3 = Ship(
         name='Despot',
-        manufacturer_id='1',
-        category_id='1',
+        manufacturer_id=1,
+        category_id=1,
         size=8993,
         designer='Kr\'Andull',
         crew_cap=500,
@@ -70,8 +70,8 @@ with app.app_context():
     )
     ship4 = Ship(
         name='Star Talon',
-        manufacturer_id='2',
-        category_id='2',
+        manufacturer_id=2,
+        category_id=2,
         size=340,
         designer='Aren Bellee',
         crew_cap=350,
@@ -85,8 +85,8 @@ with app.app_context():
     )
     ship5 = Ship(
         name='Proton',
-        manufacturer_id='2',
-        category_id='2',
+        manufacturer_id=2,
+        category_id=2,
         size=945,
         designer='Zach Rizer',
         crew_cap=10,
@@ -100,8 +100,8 @@ with app.app_context():
     )
     ship6 = Ship(
         name='Trenxal',
-        manufacturer_id='2',
-        category_id='2',
+        manufacturer_id=2,
+        category_id=2,
         size=86,
         designer='Vlegi Moveloi',
         crew_cap=50,
@@ -115,8 +115,8 @@ with app.app_context():
     )
     ship7 = Ship(
         name='The Rubber Ducky',
-        manufacturer_id='3',
-        category_id='3',
+        manufacturer_id=3,
+        category_id=3,
         size=10,
         designer='Ian Magenta',
         crew_cap=2,
@@ -130,8 +130,8 @@ with app.app_context():
     )
     ship8 = Ship(
         name='The Æthelwulf',
-        manufacturer_id='3',
-        category_id='3',
+        manufacturer_id=3,
+        category_id=3,
         size=1212,
         designer='Take Mayuma',
         crew_cap=50,
@@ -145,8 +145,8 @@ with app.app_context():
     )
     ship9 = Ship(
         name='Poseidon',
-        manufacturer_id='3',
-        category_id='3',
+        manufacturer_id=3,
+        category_id=3,
         size=7564,
         designer='Sui Gwu-Pao',
         crew_cap=1200,
@@ -160,8 +160,8 @@ with app.app_context():
     )
     ship10 = Ship(
         name='Apollo',
-        manufacturer_id='4',
-        category_id='4',
+        manufacturer_id=4,
+        category_id=4,
         size=765,
         designer='William Schraeder',
         crew_cap=300,
@@ -175,8 +175,8 @@ with app.app_context():
     )
     ship11 = Ship(
         name='Oberon Nova',
-        manufacturer_id='4',
-        category_id='4',
+        manufacturer_id=4,
+        category_id=4,
         size=276,
         designer='Valdis Simril',
         crew_cap=100,
@@ -190,8 +190,8 @@ with app.app_context():
     )
     ship12 = Ship(
         name='ISV Rimward Gold',
-        manufacturer_id='4',
-        category_id='4',
+        manufacturer_id=4,
+        category_id=4,
         size=764,
         designer='Guinevere Watrous',
         crew_cap=250,
@@ -205,8 +205,8 @@ with app.app_context():
     )
     ship13 = Ship(
         name='Rimward Perseus',
-        manufacturer_id='5',
-        category_id='5',
+        manufacturer_id=5,
+        category_id=5,
         size=476,
         designer='Derrik Alder',
         crew_cap=100,
@@ -220,8 +220,8 @@ with app.app_context():
     )
     ship14 = Ship(
         name='Tycho',
-        manufacturer_id='5',
-        category_id='5',
+        manufacturer_id=5,
+        category_id=5,
         size=156,
         designer='Maddox Volante',
         crew_cap=50,
@@ -235,8 +235,8 @@ with app.app_context():
     )
     ship15 = Ship(
         name='The Leviathan',
-        manufacturer_id='5',
-        category_id='5',
+        manufacturer_id=5,
+        category_id=5,
         size=3745,
         designer='Abdullah Wafy',
         crew_cap=1000,

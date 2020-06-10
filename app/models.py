@@ -6,11 +6,16 @@ db = SQLAlchemy()
 class Ship(db.Model):
     __tablename__ = 'ships'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)  # autoincrement=True
     name = db.Column(db.String(50), nullable=False, unique=True)
-    manufacturer_id = db.Column(db.Integer, db.ForeignKey(
+    manufacturer_id = db.Column(db.String, db.ForeignKey(
         'manufacturers.id'), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+<<<<<<< HEAD
+    category_id = db.Column(db.String, db.ForeignKey(
+=======
+    category_id = db.Column(db.Integer, db.ForeignKey(
+>>>>>>> master
+        'categories.id'), nullable=False)
     size = db.Column(db.Integer, nullable=False)
     designer = db.Column(db.String(50), nullable=False)
     crew_cap = db.Column(db.Integer, nullable=False)
@@ -31,7 +36,7 @@ class Ship(db.Model):
 class Manufacturer(db.Model):
     __tablename__ = 'manufacturers'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
 
     ships = db.relationship('Ship', back_populates='manufacturer')
@@ -40,7 +45,7 @@ class Manufacturer(db.Model):
 class Category(db.Model):
     __tablename__ = 'categories'
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
 
     ships = db.relationship('Ship', back_populates='category')
@@ -94,4 +99,3 @@ class Review(db.Model):
 
     customer = db.relationship('Customer', back_populates='reviews')
     ship = db.relationship('Ship', back_populates='reviews')
-

@@ -4,6 +4,7 @@ from graphene_sqlalchemy import SQLAlchemyObjectType
 
 from .models import db, Category, Customer, Manufacturer, Ship, Order, OrderItem, Review
 
+
 class ShipType(SQLAlchemyObjectType):
     class Meta:
         model = Ship
@@ -36,4 +37,9 @@ class OrderItemType(SQLAlchemyObjectType):
 
 class ReviewType(SQLAlchemyObjectType):
     class Meta:
+<<<<<<< HEAD
         model = Review
+        interfaces = (relay.Node, )
+=======
+        model = Review
+>>>>>>> master

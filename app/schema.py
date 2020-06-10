@@ -11,7 +11,6 @@ from .auth import AuthError, requires_auth
 class ShipNode(SQLAlchemyObjectType):
     class Meta:
         model = Ship
-        interfaces = (Node,)
         connection_field_factory = MyFilterableConnectionField.factory
 
 

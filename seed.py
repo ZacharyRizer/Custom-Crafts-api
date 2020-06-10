@@ -96,7 +96,7 @@ with app.app_context():
         model_link='/spaceships/ship1.glb',
         description='Big black circle, causes destruction',
         stock=3,
-        price=954
+        price=23000
     )
     ship6 = Ship(
         name='Trenxal',

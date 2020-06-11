@@ -131,7 +131,7 @@ class AddOrder(graphene.Mutation):
     class Arguments:
         customer_id = graphene.Int()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, customer_id):
         order = Order(customer_id=customer_id)
         db.session.add(order)
@@ -153,7 +153,7 @@ class AddOrderItem(graphene.Mutation):
         ship_id = graphene.Int()
         quantity = graphene.Int()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, order_id, ship_id, quantity):
         order_item = OrderItem(
             order_id=order_id, ship_id=ship_id, quantity=quantity)

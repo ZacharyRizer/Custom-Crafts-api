@@ -104,7 +104,7 @@ class AddCustomer(graphene.Mutation):
         email = graphene.String()
         auth0_id = graphene.String()
 
-    # @requires_auth
+    @requires_auth
     def mutate(self, info, name, email, auth0_id):
         customer = Customer.query.filter(Customer.email == email).first()
         if customer:
@@ -131,6 +131,7 @@ class AddOrder(graphene.Mutation):
     class Arguments:
         customer_id = graphene.Int()
 
+    @requires_auth
     def mutate(self, info, customer_id):
         order = Order(customer_id=customer_id)
         db.session.add(order)
@@ -152,6 +153,7 @@ class AddOrderItem(graphene.Mutation):
         ship_id = graphene.Int()
         quantity = graphene.Int()
 
+    @requires_auth
     def mutate(self, info, order_id, ship_id, quantity):
         order_item = OrderItem(
             order_id=order_id, ship_id=ship_id, quantity=quantity)
@@ -166,12 +168,33 @@ class AddOrderItem(graphene.Mutation):
         )
 
 
+class UpdateShip(graphene.Mutation):
+    id = graphene.Int()
+    stock = graphene.Int()
+
+    class Arguments:
+        id = graphene.Int()
+        new_quantity = graphene.Int()
+
+    # @requires_auth
+    def mutate(self, info, id, new_quantity):
+        ship = Ship.query.get(id)
+        ship.stock = new_quantity
+        db.session.commit()
+
+        return UpdateShip(
+            id=id,
+            stock=new_quantity
+        )
+
+
 class DeleteOrder(graphene.Mutation):
     id = graphene.Int()
 
     class Arguments:
         id = graphene.Int()
 
+    @requires_auth
     def mutate(self, info, id):
         db.session.delete(Order.query.get(id))
         db.session.commit()
@@ -185,6 +208,7 @@ class DeleteOrderItem(graphene.Mutation):
     class Arguments:
         id = graphene.Int()
 
+    @requires_auth
     def mutate(self, info, id):
         db.session.delete(OrderItem.query.get(id))
         db.session.commit()
@@ -209,6 +233,7 @@ class AddReview(graphene.Mutation):
         rating = graphene.Int()
         description = graphene.String()
 
+    @requires_auth
     def mutate(self, info, customer_id, ship_id, rating, description):
         review = Review(customer_id=customer_id, ship_id=ship_id,
                         rating=rating, description=description)
@@ -230,6 +255,7 @@ class DeleteReview(graphene.Mutation):
     class Arguments:
         id = graphene.Int()
 
+    @requires_auth
     def mutate(self, info, id):
         db.session.delete(Review.query.get(id))
         db.session.commit()
@@ -245,6 +271,7 @@ class Mutation(graphene.ObjectType):
     delete_order_item = DeleteOrderItem.Field()
     add_review = AddReview.Field()
     delete_review = DeleteReview.Field()
+    update_ship = UpdateShip.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

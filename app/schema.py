@@ -131,7 +131,7 @@ class AddOrder(graphene.Mutation):
     class Arguments:
         customer_id = graphene.Int()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, customer_id):
         order = Order(customer_id=customer_id)
         db.session.add(order)
@@ -153,7 +153,7 @@ class AddOrderItem(graphene.Mutation):
         ship_id = graphene.Int()
         quantity = graphene.Int()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, order_id, ship_id, quantity):
         order_item = OrderItem(
             order_id=order_id, ship_id=ship_id, quantity=quantity)
@@ -168,23 +168,26 @@ class AddOrderItem(graphene.Mutation):
         )
 
 
-class UpdateShip(graphene.Mutation):
+class DecrementShipStock(graphene.Mutation):
     id = graphene.Int()
     stock = graphene.Int()
 
     class Arguments:
         id = graphene.Int()
-        new_quantity = graphene.Int()
+        dec_quantity = graphene.Int()
 
     # @requires_auth
-    def mutate(self, info, id, new_quantity):
+    def mutate(self, info, id, dec_quantity):
         ship = Ship.query.get(id)
-        ship.stock = new_quantity
+        if ship.stock >= dec_quantity:
+            ship.stock -= dec_quantity
+        else:
+            ship.stock = 0
         db.session.commit()
 
-        return UpdateShip(
+        return DecrementShipStock(
             id=id,
-            stock=new_quantity
+            stock=ship.stock
         )
 
 
@@ -271,7 +274,7 @@ class Mutation(graphene.ObjectType):
     delete_order_item = DeleteOrderItem.Field()
     add_review = AddReview.Field()
     delete_review = DeleteReview.Field()
-    update_ship = UpdateShip.Field()
+    decrement_ship_stock = DecrementShipStock.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

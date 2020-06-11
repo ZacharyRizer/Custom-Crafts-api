@@ -1,7 +1,8 @@
 from graphene_sqlalchemy_filter import FilterableConnectionField, FilterSet
 from .models import Ship
 # ALL_OPERATIONS = ['eq', 'ne', 'like', 'ilike', 'is_null', 'in', 'not_in', 'lt', 'lte', 'gt', 'gte', 'range']
-OPERATIONS = ['eq', 'range']
+OPERATIONS = ['eq', 'range', 'ilike']
+
 
 class ShipFilter(FilterSet):
     class Meta:
@@ -15,8 +16,9 @@ class ShipFilter(FilterSet):
             "travel_range": ['range'],
             "price": ['range'],
             "ftl": ['eq'],
-            "used": ['eq']
-         }
+            "used": ['eq'],
+            "name": ['iLike']
+        }
 
 
 class MyFilterableConnectionField(FilterableConnectionField):

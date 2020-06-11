@@ -24,11 +24,11 @@ class Query(graphene.ObjectType):
 
     categories = graphene.List(CategoryType)
     category = graphene.Field(
-        CategoryType, category_id=graphene.String())
+        CategoryType, category_id=graphene.Int())
 
     manufacturers = graphene.List(ManufacturerType)
     manufacturer = graphene.Field(
-        ManufacturerType, manufacturer_id=graphene.String())
+        ManufacturerType, manufacturer_id=graphene.Int())
 
     orders = graphene.List(OrderType)
     order = graphene.Field(
@@ -104,10 +104,12 @@ class AddCustomer(graphene.Mutation):
         email = graphene.String()
         auth0_id = graphene.String()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, name, email, auth0_id):
-        customer = Customer(name=name, email=email, auth0_id=auth0_id)
-        db.session.merge(customer)
+        customer = Customer(name=name,
+                            email=email, auth0_id=auth0_id)
+        db.session.add(customer)
+        print('customer id', customer, customer.id)
         db.session.commit()
 
         return AddCustomer(

@@ -106,10 +106,14 @@ class AddCustomer(graphene.Mutation):
 
     # @requires_auth
     def mutate(self, info, name, email, auth0_id):
-        customer = Customer(name=name,
-                            email=email, auth0_id=auth0_id)
-        db.session.add(customer)
-        print('customer id', customer, customer.id)
+        customer = Customer.query.filter(Customer.email == email).first()
+        if customer:
+            customer.name = name
+            customer.email = email
+            customer.auth0_id = auth0_id
+        else:
+            customer = Customer(name=name, email=email, auth0_id=auth0_id)
+            db.session.add(customer)
         db.session.commit()
 
         return AddCustomer(

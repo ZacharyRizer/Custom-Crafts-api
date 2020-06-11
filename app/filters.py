@@ -17,7 +17,7 @@ class ShipFilter(FilterSet):
             "price": ['range'],
             "ftl": ['eq'],
             "used": ['eq'],
-            "name": ['iLike']
+            "name": ['ilike']
         }
 
 

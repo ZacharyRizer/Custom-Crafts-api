@@ -1,6 +1,8 @@
 import graphene
 from graphene import Connection, Node, relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
+import threading
+import json
 
 from .filters import MyFilterableConnectionField
 from .models import db, Category, Customer, Manufacturer, Ship, Order, OrderItem, Review
@@ -69,9 +71,11 @@ class Query(graphene.ObjectType):
         return Order.query.all()
 
     def resolve_order(self, info, order_id):
+        print('resolve_order')
         return Order.query.get(order_id)
 
     def resolve_order_items(self, info, **kwargs):
+        print('resolve order_items')
         return OrderItem.query.all()
 
     def resolve_order_item(self, info, order_item_id):
@@ -87,6 +91,7 @@ class Query(graphene.ObjectType):
         return Customer.query.all()
 
     def resolve_customer(self, info, customer_id):
+        print('customer resolver')
         return Customer.query.get(customer_id)
 
 
@@ -124,47 +129,102 @@ class AddCustomer(graphene.Mutation):
         )
 
 
+# class ItemInputType(graphene.InputObjectType):
+#     ship_id = graphene.Int(required=True)
+#     quantity = graphene.Int(required=True)
+
+
+class OrderItemInputType(graphene.InputObjectType):
+    customer_id = graphene.Int()
+    items = graphene.JSONString()
+    # ship_id = graphene.Int(required=True)
+    # quantity = graphene.Int(required=True)
+
+
 class AddOrder(graphene.Mutation):
     id = graphene.Int()
-    customer_id = graphene.Int()
+    # customer_id = graphene.Int()
+    cart = graphene.Field(OrderItemType)
 
     class Arguments:
-        customer_id = graphene.Int()
+        # customer_id = graphene.Int()
+        cart = graphene.Argument(OrderItemInputType)
 
-    # @requires_auth
-    def mutate(self, info, customer_id):
-        order = Order(customer_id=customer_id)
+        # @requires_auth
+    # @staticmethod
+    def mutate(self, info, cart):
+        print(f'CART!!!', cart)
+        print('type stuff', type(cart.items))
+        print('order mutation')
+        order = Order(customer_id=cart.customer_id)
+
+        def makeOrderItem(order, item):
+            print('in fix order')
+            print('order_id: ', order.id)
+            order_item = OrderItem(
+                order_id=order.id, ship_id=item['shipId'], quantity=item['quantity'])
+            db.session.add(order_item)
+            db.session.commit()
+
         db.session.add(order)
         db.session.commit()
 
+        # loop through cart
+        # print(f'cart Items: {cart_items}')
+        # cart = json.loads(f'{{"items": {cart_items}}}')
+        # print(f'cart: {cart}')
+        for item in cart.items:
+            makeOrderItem(order, item)
+
         return AddOrder(
-            id=order.id,
-            customer_id=order.customer_id)
+            id=order.id)
+        # customer_id=order.customer_id)
 
 
-class AddOrderItem(graphene.Mutation):
+# class AddOrderItem(graphene.Mutation):
+#     print('orderItem mutation')
+
+#     id = graphene.Int()
+#     order_id = graphene.Int()
+#     ship_id = graphene.Int()
+#     quantity = graphene.Int()
+
+#     class Arguments:
+#         order_id = graphene.Int()
+#         ship_id = graphene.Int()
+#         quantity = graphene.Int()
+
+#     @requires_auth
+#     def mutate(self, info, order_id, ship_id, quantity):
+#         order_item = OrderItem(
+#             order_id=order_id, ship_id=ship_id, quantity=quantity)
+#         db.session.add(order_item)
+#         db.session.commit()
+
+#         return AddOrderItem(
+#             id=order_item.id,
+#             order_id=order_item.order_id,
+#             ship_id=order_item.ship_id,
+#             quantity=order_item.quantity
+#         )
+
+
+class IncrementShipStock(graphene.Mutation):
     id = graphene.Int()
-    order_id = graphene.Int()
-    ship_id = graphene.Int()
-    quantity = graphene.Int()
+    stock = graphene.Int()
 
     class Arguments:
-        order_id = graphene.Int()
-        ship_id = graphene.Int()
-        quantity = graphene.Int()
+        id = graphene.Int()
+        inc_quantity = graphene.Int()
 
-    # @requires_auth
-    def mutate(self, info, order_id, ship_id, quantity):
-        order_item = OrderItem(
-            order_id=order_id, ship_id=ship_id, quantity=quantity)
-        db.session.add(order_item)
+    def mutate(self, info, id, inc_quantity):
+        ship = Ship.query.get(id)
+        ship.stock += inc_quantity
         db.session.commit()
 
-        return AddOrderItem(
-            id=order_item.id,
-            order_id=order_item.order_id,
-            ship_id=order_item.ship_id,
-            quantity=order_item.quantity
+        return IncrementShipStock(
+            id=id,
+            stock=ship.stock
         )
 
 
@@ -176,8 +236,9 @@ class DecrementShipStock(graphene.Mutation):
         id = graphene.Int()
         dec_quantity = graphene.Int()
 
-    # @requires_auth
+    @requires_auth
     def mutate(self, info, id, dec_quantity):
+        print(f'self {self}')
         ship = Ship.query.get(id)
         if ship.stock >= dec_quantity:
             ship.stock -= dec_quantity
@@ -185,10 +246,20 @@ class DecrementShipStock(graphene.Mutation):
             ship.stock = 0
         db.session.commit()
 
+        if ship.stock == 0:
+            t = threading.Timer(20, self.upStock)
+            t.start()
+
+            # test = Timer(300, (lambda:print('testing')))
+
         return DecrementShipStock(
             id=id,
             stock=ship.stock
         )
+
+        def upStock(self, info):
+            self.stock += 4
+            db.session.commit()
 
 
 class DeleteOrder(graphene.Mutation):
@@ -269,12 +340,13 @@ class DeleteReview(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     add_customer = AddCustomer.Field()
     add_order = AddOrder.Field()
-    add_order_item = AddOrderItem.Field()
+    # add_order_item = AddOrderItem.Field()
     delete_order = DeleteOrder.Field()
     delete_order_item = DeleteOrderItem.Field()
     add_review = AddReview.Field()
     delete_review = DeleteReview.Field()
     decrement_ship_stock = DecrementShipStock.Field()
+    increment_ship_stock = IncrementShipStock.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

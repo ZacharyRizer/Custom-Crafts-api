@@ -168,6 +168,25 @@ class AddOrderItem(graphene.Mutation):
         )
 
 
+class IncrementShipStock(graphene.Mutation):
+    id = graphene.Int()
+    stock = graphene.Int()
+
+    class Arguments:
+        id = graphene.Int()
+        inc_quantity = graphene.Int()
+
+    def mutate(self, info, id, inc_quantity):
+        ship = Ship.query.get(id)
+        ship.stock += inc_quantity
+        db.session.commit()
+
+        return IncrementShipStock(
+            id=id,
+            stock=ship.stock
+        )
+
+
 class DecrementShipStock(graphene.Mutation):
     id = graphene.Int()
     stock = graphene.Int()
@@ -178,12 +197,19 @@ class DecrementShipStock(graphene.Mutation):
 
     # @requires_auth
     def mutate(self, info, id, dec_quantity):
+        print(f'self {self}')
         ship = Ship.query.get(id)
         if ship.stock >= dec_quantity:
             ship.stock -= dec_quantity
         else:
             ship.stock = 0
         db.session.commit()
+
+        if ship.stock == 0:
+            t = Timer(300, IncrementShipStock.Field, (id, 4))
+            t.start()
+
+            # test = Timer(300, (lambda:print('testing')))
 
         return DecrementShipStock(
             id=id,
@@ -275,6 +301,7 @@ class Mutation(graphene.ObjectType):
     add_review = AddReview.Field()
     delete_review = DeleteReview.Field()
     decrement_ship_stock = DecrementShipStock.Field()
+    increment_ship_stock = IncrementShipStock.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

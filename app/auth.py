@@ -5,7 +5,7 @@ from flask import request, _request_ctx_stack
 from jose import jwt
 
 AUTH0_DOMAIN = 'custom-crafts.auth0.com'
-API_AUDIENCE = 'custom-crafts-api'
+API_AUDIENCE = 'https://custom-crafts.auth0.com/api/v2/'
 ALGORITHMS = ['RS256']
 
 

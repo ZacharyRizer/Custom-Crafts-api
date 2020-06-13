@@ -2,6 +2,7 @@ import graphene
 from graphene import Connection, Node, relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 import threading
+import asyncio
 import json
 
 from .filters import MyFilterableConnectionField
@@ -143,38 +144,56 @@ class OrderItemInputType(graphene.InputObjectType):
 
 class AddOrder(graphene.Mutation):
     id = graphene.Int()
-    # customer_id = graphene.Int()
     cart = graphene.Field(OrderItemType)
 
     class Arguments:
-        # customer_id = graphene.Int()
         cart = graphene.Argument(OrderItemInputType)
 
-        # @requires_auth
-    # @staticmethod
     def mutate(self, info, cart):
-        print(f'CART!!!', cart)
-        print('type stuff', type(cart.items))
-        print('order mutation')
         order = Order(customer_id=cart.customer_id)
 
         def makeOrderItem(order, item):
-            print('in fix order')
-            print('order_id: ', order.id)
             order_item = OrderItem(
-                order_id=order.id, ship_id=item['shipId'], quantity=item['quantity'])
+                order_id=order.id,
+                ship_id=item['shipId'],
+                quantity=item['quantity'])
             db.session.add(order_item)
             db.session.commit()
+
+        def incrementStockLocal(shipId):
+            print(f'shipId {shipId}')
+            # shipI = Ship.query.get(shipId)
+            # print('in incrementStockLocal')
+            # shipI.stock += 4
+            # db.session.commit()
+
+        def decrementStockLocal(item):
+            ship = Ship.query.get(item['shipId'])
+            ship.stock -= item['quantity']
+            db.session.commit()
+            print(f'before if, ship.stock')
+            if ship.stock == 0:
+                # print('creating asyncio loop obj')
+                # loop = asyncio.new_event_loop()
+                # asyncio.set_event_loop(loop)
+                # loop.call_later(8, incrementStockLocal, ship)
+                # loop.run_until_complete()
+                # loop.close()
+
+                t = threading.Timer(8, incrementStockLocal, ([ship.id]))
+                t.start()
+                db.session.commit()
 
         db.session.add(order)
         db.session.commit()
 
         # loop through cart
-        # print(f'cart Items: {cart_items}')
-        # cart = json.loads(f'{{"items": {cart_items}}}')
-        # print(f'cart: {cart}')
+
         for item in cart.items:
             makeOrderItem(order, item)
+            decrementStockLocal(item)
+
+        # db.session.commit()
 
         return AddOrder(
             id=order.id)
@@ -246,20 +265,16 @@ class DecrementShipStock(graphene.Mutation):
             ship.stock = 0
         db.session.commit()
 
-        if ship.stock == 0:
-            t = threading.Timer(20, self.upStock)
-            t.start()
+        # if ship.stock == 0:
+        #     t = threading.Timer(20, self.upStock)
+        #     t.start()
 
-            # test = Timer(300, (lambda:print('testing')))
+        # test = Timer(300, (lambda:print('testing')))
 
         return DecrementShipStock(
             id=id,
             stock=ship.stock
         )
-
-        def upStock(self, info):
-            self.stock += 4
-            db.session.commit()
 
 
 class DeleteOrder(graphene.Mutation):
@@ -307,7 +322,7 @@ class AddReview(graphene.Mutation):
         rating = graphene.Int()
         description = graphene.String()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, customer_id, ship_id, rating, description):
         review = Review(customer_id=customer_id, ship_id=ship_id,
                         rating=rating, description=description)
@@ -329,7 +344,7 @@ class DeleteReview(graphene.Mutation):
     class Arguments:
         id = graphene.Int()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, id):
         db.session.delete(Review.query.get(id))
         db.session.commit()

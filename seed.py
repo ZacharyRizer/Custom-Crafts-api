@@ -1,5 +1,5 @@
 from app.models import Manufacturer, Ship, Category, db
-from app import app
+from app import create_app
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -7,6 +7,8 @@ load_dotenv()
 # price = 100, 100-1000, 1000-10000, 10000-100000, 100000+
 # range = 25, 25-100, 100-1000, 1000-10000, 10000+
 # crew_cap = 10, 10-100, 100-500, 500-1000, 1000+
+
+app = create_app()
 
 with app.app_context():
     db.drop_all()

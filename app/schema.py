@@ -322,7 +322,7 @@ class AddReview(graphene.Mutation):
         rating = graphene.Int()
         description = graphene.String()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, customer_id, ship_id, rating, description):
         review = Review(customer_id=customer_id, ship_id=ship_id,
                         rating=rating, description=description)
@@ -344,7 +344,7 @@ class DeleteReview(graphene.Mutation):
     class Arguments:
         id = graphene.Int()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, id):
         db.session.delete(Review.query.get(id))
         db.session.commit()

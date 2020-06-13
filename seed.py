@@ -280,3 +280,5 @@ with app.app_context():
     db.session.add(ship15)
 
     db.session.commit()
+
+    print('finish seed')

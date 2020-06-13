@@ -20,6 +20,7 @@ graphene = "*"
 graphene-sqlalchemy = "*"
 flask-graphql = "*"
 graphene-sqlalchemy-filter = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"

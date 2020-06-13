@@ -92,6 +92,8 @@ class Review(db.Model):
     ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String)
+    upVoteCount = db.Column(db.Integer)
+    downVoteCount = db.Column(db.Integer)
 
     customer = db.relationship('Customer', back_populates='reviews')
     ship = db.relationship('Ship', back_populates='reviews')

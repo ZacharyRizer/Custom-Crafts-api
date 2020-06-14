@@ -54,6 +54,7 @@ class Customer(db.Model):
     name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False, unique=True)
     auth0_id = db.Column(db.String, unique=True)
+    picture = db.Column(db.String)
 
     orders = db.relationship('Order', back_populates='customer')
     reviews = db.relationship('Review', back_populates='customer')
@@ -78,6 +79,7 @@ class OrderItem(db.Model):
         'orders.id'), nullable=False)
     ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    color = db.Column(db.String)
 
     order = db.relationship('Order', back_populates='order_items')
     ship = db.relationship('Ship', back_populates='order_items')

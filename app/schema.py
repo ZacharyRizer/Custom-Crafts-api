@@ -2,8 +2,8 @@ import graphene
 from graphene import Connection, Node, relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
 import threading
-import asyncio
 import json
+import datetime
 
 from .filters import MyFilterableConnectionField
 from .models import db, Category, Customer, Manufacturer, Ship, Order, OrderItem, Review
@@ -121,7 +121,8 @@ class AddCustomer(graphene.Mutation):
             customer.auth0_id = auth0_id
             customer.picture = picture
         else:
-            customer = Customer(name=name, email=email, auth0_id=auth0_id, picture=picture)
+            customer = Customer(name=name, email=email,
+                                auth0_id=auth0_id, picture=picture)
             db.session.add(customer)
         db.session.commit()
 
@@ -160,7 +161,9 @@ class AddOrder(graphene.Mutation):
             order_item = OrderItem(
                 order_id=order.id,
                 ship_id=item['shipId'],
-                quantity=item['quantity'])
+                quantity=item['quantity'],
+                color=item['color'],
+                created_at=datetime.datetime.now())
             db.session.add(order_item)
             db.session.commit()
 
@@ -174,6 +177,11 @@ class AddOrder(graphene.Mutation):
         def decrementStockLocal(item):
             ship = Ship.query.get(item['shipId'])
             ship.stock -= item['quantity']
+
+            # adjust total sold
+
+            ship.total_sold += item['quantity']
+
             db.session.commit()
             print(f'before if, ship.stock')
             if ship.stock == 0:

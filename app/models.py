@@ -78,6 +78,7 @@ class OrderItem(db.Model):
         'orders.id'), nullable=False)
     ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
+    color = db.Column(db.String)
 
     order = db.relationship('Order', back_populates='order_items')
     ship = db.relationship('Ship', back_populates='order_items')

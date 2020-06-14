@@ -218,7 +218,7 @@ with app.app_context():
         price=96000
     )
     ship13 = Ship(
-        name='Rimward Perseus',
+        name='DH Enterprise',
         manufacturer_id=5,
         category_id=3,
         size=476,
@@ -265,6 +265,86 @@ with app.app_context():
         total_sold=0,
         price=999999
     )
+    ship16 = Ship(
+        name='Graphene',
+        manufacturer_id=5,
+        category_id=5,
+        size=3745,
+        designer='Abdullah Wafy',
+        crew_cap=1000,
+        travel_range=12000,
+        ftl=True,
+        used=False,
+        model_link='/spaceships/ship20_orange.glb',
+        description='Big black circle, causes destruction',
+        stock=3,
+        total_sold=0,
+        price=999999
+    )
+    ship17 = Ship(
+        name='Angel',
+        manufacturer_id=5,
+        category_id=5,
+        size=3745,
+        designer='Abdullah Wafy',
+        crew_cap=1000,
+        travel_range=12000,
+        ftl=True,
+        used=False,
+        model_link='/spaceships/ship16_orange.glb',
+        description='Big black circle, causes destruction',
+        stock=3,
+        total_sold=0,
+        price=999999
+    )
+    ship18 = Ship(
+        name='Carini',
+        manufacturer_id=5,
+        category_id=5,
+        size=3745,
+        designer='Abdullah Wafy',
+        crew_cap=1000,
+        travel_range=12000,
+        ftl=True,
+        used=False,
+        model_link='/spaceships/ship17_red.glb',
+        description='Big black circle, causes destruction',
+        stock=3,
+        total_sold=0,
+        price=999999
+    )
+    ship19 = Ship(
+        name='The Milano',
+        manufacturer_id=5,
+        category_id=5,
+        size=3745,
+        designer='Abdullah Wafy',
+        crew_cap=1000,
+        travel_range=12000,
+        ftl=True,
+        used=False,
+        model_link='/spaceships/ship18_blue.glb',
+        description='Big black circle, causes destruction',
+        stock=3,
+        total_sold=0,
+        price=999999
+    )
+    ship20 = Ship(
+        name='Mutation',
+        manufacturer_id=5,
+        category_id=5,
+        size=3745,
+        designer='Abdullah Wafy',
+        crew_cap=1000,
+        travel_range=12000,
+        ftl=True,
+        used=False,
+        model_link='/spaceships/ship19_green.glb',
+        description='Big black circle, causes destruction',
+        stock=3,
+        total_sold=0,
+        price=999999
+    )
 
     db.session.add(man1)
     db.session.add(man2)
@@ -293,6 +373,11 @@ with app.app_context():
     db.session.add(ship13)
     db.session.add(ship14)
     db.session.add(ship15)
+    db.session.add(ship16)
+    db.session.add(ship17)
+    db.session.add(ship18)
+    db.session.add(ship19)
+    db.session.add(ship20)
 
     db.session.commit()
 

@@ -22,6 +22,7 @@ class Ship(db.Model):
     description = db.Column(db.String)
     stock = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    total_sold = db.Column(db.Integer)
 
     manufacturer = db.relationship('Manufacturer', back_populates='ships')
     category = db.relationship('Category', back_populates='ships')
@@ -80,6 +81,7 @@ class OrderItem(db.Model):
     ship_id = db.Column(db.Integer, db.ForeignKey('ships.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
     color = db.Column(db.String)
+    created_at = db.Column(db.DateTime)
 
     order = db.relationship('Order', back_populates='order_items')
     ship = db.relationship('Ship', back_populates='order_items')

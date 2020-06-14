@@ -38,6 +38,7 @@ with app.app_context():
         model_link='/spaceships/ship1_green.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=470000
     )
     ship2 = Ship(
@@ -53,6 +54,7 @@ with app.app_context():
         model_link='/spaceships/ship2_red.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=850000
     )
     ship3 = Ship(
@@ -68,6 +70,7 @@ with app.app_context():
         model_link='/spaceships/ship3_orange.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=150000
     )
     ship4 = Ship(
@@ -83,6 +86,7 @@ with app.app_context():
         model_link='/spaceships/ship4_blue.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=8700
     )
     ship5 = Ship(
@@ -98,6 +102,7 @@ with app.app_context():
         model_link='/spaceships/ship5_red.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=23000
     )
     ship6 = Ship(
@@ -113,6 +118,7 @@ with app.app_context():
         model_link='/spaceships/ship6_blue.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=657
     )
     ship7 = Ship(
@@ -128,6 +134,7 @@ with app.app_context():
         model_link='/spaceships/ship7_orange.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=75
     )
     ship8 = Ship(
@@ -143,6 +150,7 @@ with app.app_context():
         model_link='/spaceships/ship2_red.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=67000
     )
     ship9 = Ship(
@@ -158,6 +166,7 @@ with app.app_context():
         model_link='/spaceships/ship9_orange.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=8900
     )
     ship10 = Ship(
@@ -173,6 +182,7 @@ with app.app_context():
         model_link='/spaceships/ship5_red.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=435
     )
     ship11 = Ship(
@@ -188,6 +198,7 @@ with app.app_context():
         model_link='/spaceships/ship11_blue.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=8700
     )
     ship12 = Ship(
@@ -203,6 +214,7 @@ with app.app_context():
         model_link='/spaceships/ship12_orange.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=96000
     )
     ship13 = Ship(
@@ -218,6 +230,7 @@ with app.app_context():
         model_link='/spaceships/ship1_green.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=9000
     )
     ship14 = Ship(
@@ -233,6 +246,7 @@ with app.app_context():
         model_link='/spaceships/ship14_green.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=65000
     )
     ship15 = Ship(
@@ -248,6 +262,7 @@ with app.app_context():
         model_link='/spaceships/ship15_blue.glb',
         description='Big black circle, causes destruction',
         stock=3,
+        total_sold=0,
         price=999999
     )
 

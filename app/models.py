@@ -54,6 +54,7 @@ class Customer(db.Model):
     name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False, unique=True)
     auth0_id = db.Column(db.String, unique=True)
+    picture = db.Column(db.String)
 
     orders = db.relationship('Order', back_populates='customer')
     reviews = db.relationship('Review', back_populates='customer')

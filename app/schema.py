@@ -104,21 +104,24 @@ class AddCustomer(graphene.Mutation):
     name = graphene.String()
     email = graphene.String()
     auth0_id = graphene.String()
+    picture = graphene.String()
 
     class Arguments:
         name = graphene.String()
         email = graphene.String()
         auth0_id = graphene.String()
+        picture = graphene.String()
 
     @requires_auth
-    def mutate(self, info, name, email, auth0_id):
+    def mutate(self, info, name, email, auth0_id, picture):
         customer = Customer.query.filter(Customer.email == email).first()
         if customer:
             customer.name = name
             customer.email = email
             customer.auth0_id = auth0_id
+            customer.picture = picture
         else:
-            customer = Customer(name=name, email=email, auth0_id=auth0_id)
+            customer = Customer(name=name, email=email, auth0_id=auth0_id, picture=picture)
             db.session.add(customer)
         db.session.commit()
 
@@ -126,7 +129,8 @@ class AddCustomer(graphene.Mutation):
             id=customer.id,
             name=customer.name,
             email=customer.email,
-            auth0_id=customer.auth0_id
+            auth0_id=customer.auth0_id,
+            picture=customer.picture
         )
 
 

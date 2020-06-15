@@ -271,10 +271,8 @@ class DecrementShipStock(graphene.Mutation):
     def mutate(self, info, id, dec_quantity):
         print(f'self {self}')
         ship = Ship.query.get(id)
-        if ship.stock >= dec_quantity:
-            ship.stock -= dec_quantity
-        else:
-            ship.stock = 0
+        ship.stock -= dec_quantity
+
         db.session.commit()
 
         # if ship.stock == 0:
@@ -338,12 +336,13 @@ class AddReview(graphene.Mutation):
     def mutate(self, info, customer_id, ship_id, rating, description):
         review = Review(customer_id=customer_id, ship_id=ship_id,
                         rating=rating, description=description)
+        customer = Customer.query.get(customer_id)
         db.session.add(review)
         db.session.commit()
 
         return AddReview(
             id=review.id,
-            customer_id=review.customer_id,
+            customer=review.customer,
             ship_id=review.ship_id,
             rating=review.rating,
             description=review.description

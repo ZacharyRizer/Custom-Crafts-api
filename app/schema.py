@@ -84,6 +84,9 @@ class Query(graphene.ObjectType):
 
     def resolve_reviews(self, info, **kwargs):
         return Review.query.all()
+        # return db.session.query(Review).options(joinedload
+        #                                         (Customer.name,
+        #                                          Customer.picture)).all()
 
     def resolve_review(self, info, review_id):
         return Review.query.get(review_id)
@@ -329,13 +332,12 @@ class AddReview(graphene.Mutation):
     def mutate(self, info, customer_id, ship_id, rating, description):
         review = Review(customer_id=customer_id, ship_id=ship_id,
                         rating=rating, description=description)
-        customer = Customer.query.get(customer_id)
         db.session.add(review)
         db.session.commit()
 
         return AddReview(
             id=review.id,
-            customer=review.customer,
+            customer_id=review.customer_id,
             ship_id=review.ship_id,
             rating=review.rating,
             description=review.description

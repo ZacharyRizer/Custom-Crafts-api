@@ -282,7 +282,7 @@ with app.app_context():
         price=999999
     )
     ship17 = Ship(
-        name='Angel',
+        name='Carini',
         manufacturer_id=5,
         category_id=5,
         size=3745,
@@ -298,7 +298,7 @@ with app.app_context():
         price=999999
     )
     ship18 = Ship(
-        name='Carini',
+        name='Angel',
         manufacturer_id=5,
         category_id=5,
         size=3745,

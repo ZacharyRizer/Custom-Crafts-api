@@ -272,10 +272,6 @@ class DecrementShipStock(graphene.Mutation):
     def mutate(self, info, id, dec_quantity):
         ship = Ship.query.get(id)
         ship.stock -= dec_quantity
-<<<<<<< HEAD
-
-=======
->>>>>>> master
         db.session.commit()
 
         return DecrementShipStock(

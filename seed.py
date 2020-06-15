@@ -68,7 +68,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship3_orange.glb',
-        description='Big black circle, causes destruction',
+        description='Tyrannical cruiser that dictates its will upon all other spacecrafts',
         stock=3,
         total_sold=0,
         price=150000
@@ -84,7 +84,7 @@ with app.app_context():
         ftl=False,
         used=True,
         model_link='/spaceships/ship4_blue.glb',
-        description='Big black circle, causes destruction',
+        description='Scintillating through space, grasping unlicensed prey',
         stock=3,
         total_sold=0,
         price=8700
@@ -100,7 +100,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship5_red.glb',
-        description='Big black circle, causes destruction',
+        description='Positive force of Yang',
         stock=3,
         total_sold=0,
         price=23000
@@ -110,13 +110,13 @@ with app.app_context():
         manufacturer_id=2,
         category_id=1,
         size=86,
-        designer='Vlegi Moveloi',
+        designer='Abdullah Wafy',
         crew_cap=50,
         travel_range=90,
         ftl=False,
         used=True,
         model_link='/spaceships/ship6_blue.glb',
-        description='Big black circle, causes destruction',
+        description='The flying buzzer scanning for intruders',
         stock=3,
         total_sold=0,
         price=657
@@ -132,7 +132,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship7_orange.glb',
-        description='Big black circle, causes destruction',
+        description="Ian\'s favorite toy as a little kid",
         stock=3,
         total_sold=0,
         price=75
@@ -147,8 +147,13 @@ with app.app_context():
         travel_range=10,
         ftl=False,
         used=True,
+<<<<<<< HEAD
         model_link='/spaceships/ship8_red.glb',
         description='Big black circle, causes destruction',
+=======
+        model_link='/spaceships/ship8_green.glb',
+        description='Royal ambitions with medieval interior design',
+>>>>>>> master
         stock=3,
         total_sold=0,
         price=67000
@@ -164,7 +169,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship9_orange.glb',
-        description='Big black circle, causes destruction',
+        description='Rule the oceans of space as you swim through orbits',
         stock=3,
         total_sold=0,
         price=8900
@@ -180,7 +185,11 @@ with app.app_context():
         ftl=False,
         used=True,
         model_link='/spaceships/ship10_red.glb',
+<<<<<<< HEAD
         description='Big black circle, causes destruction',
+=======
+        description='To the Moon and beyond! Robust structure resists solar flares',
+>>>>>>> master
         stock=3,
         total_sold=0,
         price=435
@@ -190,13 +199,13 @@ with app.app_context():
         manufacturer_id=4,
         category_id=1,
         size=276,
-        designer='Valdis Simril',
+        designer='Abdullah Wafy',
         crew_cap=100,
         travel_range=4500,
         ftl=True,
         used=False,
         model_link='/spaceships/ship11_blue.glb',
-        description='Big black circle, causes destruction',
+        description='Tour the galaxies with the authentic merkaba',
         stock=3,
         total_sold=0,
         price=8700
@@ -211,8 +220,8 @@ with app.app_context():
         travel_range=900,
         ftl=False,
         used=True,
-        model_link='/spaceships/ship12_orange.glb',
-        description='Big black circle, causes destruction',
+        model_link='/spaceships/ship12_green.glb',
+        description='Gold-plated surfaces abound',
         stock=3,
         total_sold=0,
         price=96000
@@ -228,7 +237,11 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship13_green.glb',
+<<<<<<< HEAD
         description='Big black circle, causes destruction',
+=======
+        description='For hikers through star trails',
+>>>>>>> master
         stock=3,
         total_sold=0,
         price=9000
@@ -243,8 +256,8 @@ with app.app_context():
         travel_range=7500,
         ftl=False,
         used=True,
-        model_link='/spaceships/ship14_green.glb',
-        description='Big black circle, causes destruction',
+        model_link='/spaceships/ship14_red.glb',
+        description='Discover frontiers of the beyond',
         stock=3,
         total_sold=0,
         price=65000
@@ -260,13 +273,13 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship15_blue.glb',
-        description='Big black circle, causes destruction',
+        description='Mysterious deep-space monster of a ship dominating all others...',
         stock=3,
         total_sold=0,
         price=999999
     )
     ship16 = Ship(
-        name='Graphene',
+        name='Pegasus',
         manufacturer_id=5,
         category_id=5,
         size=3745,
@@ -276,13 +289,17 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship16_orange.glb',
-        description='Big black circle, causes destruction',
+        description='For those with a heroic bent. Fly at will with lightning speed.',
         stock=3,
         total_sold=0,
         price=999999
     )
     ship17 = Ship(
+<<<<<<< HEAD
         name='Carini',
+=======
+        name='Seraph',
+>>>>>>> master
         manufacturer_id=5,
         category_id=5,
         size=3745,
@@ -291,8 +308,8 @@ with app.app_context():
         travel_range=12000,
         ftl=True,
         used=False,
-        model_link='/spaceships/ship17_orange.glb',
-        description='Big black circle, causes destruction',
+        model_link='/spaceships/ship17_green.glb',
+        description='Exalted design with superb flight power',
         stock=3,
         total_sold=0,
         price=999999
@@ -308,7 +325,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship18_red.glb',
-        description='Big black circle, causes destruction',
+        description='Infinity pool inside in a Utopian setting',
         stock=3,
         total_sold=0,
         price=999999
@@ -318,13 +335,13 @@ with app.app_context():
         manufacturer_id=5,
         category_id=5,
         size=3745,
-        designer='Abdullah Wafy',
+        designer='Valdis Simril',
         crew_cap=1000,
         travel_range=12000,
         ftl=True,
         used=False,
         model_link='/spaceships/ship19_blue.glb',
-        description='Big black circle, causes destruction',
+        description='Crush it, smash it, own it',
         stock=3,
         total_sold=0,
         price=999999
@@ -334,13 +351,13 @@ with app.app_context():
         manufacturer_id=5,
         category_id=5,
         size=3745,
-        designer='Abdullah Wafy',
+        designer='Vlegi Moveloi',
         crew_cap=1000,
         travel_range=12000,
         ftl=True,
         used=False,
-        model_link='/spaceships/ship20_green.glb',
-        description='Big black circle, causes destruction',
+        model_link='/spaceships/ship20_orange.glb',
+        description='Malignant spread, not for benign folks',
         stock=3,
         total_sold=0,
         price=999999

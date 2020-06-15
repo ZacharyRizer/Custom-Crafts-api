@@ -248,6 +248,7 @@ class IncrementShipStock(graphene.Mutation):
         id = graphene.Int()
         inc_quantity = graphene.Int()
 
+    # @requires_auth
     def mutate(self, info, id, inc_quantity):
         ship = Ship.query.get(id)
         ship.stock += inc_quantity
@@ -267,19 +268,15 @@ class DecrementShipStock(graphene.Mutation):
         id = graphene.Int()
         dec_quantity = graphene.Int()
 
-    @requires_auth
+    # @requires_auth
     def mutate(self, info, id, dec_quantity):
-        print(f'self {self}')
         ship = Ship.query.get(id)
         ship.stock -= dec_quantity
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         db.session.commit()
-
-        # if ship.stock == 0:
-        #     t = threading.Timer(20, self.upStock)
-        #     t.start()
-
-        # test = Timer(300, (lambda:print('testing')))
 
         return DecrementShipStock(
             id=id,

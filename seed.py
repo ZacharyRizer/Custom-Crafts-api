@@ -36,7 +36,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship1_green.glb',
-        description='Big black circle, causes destruction',
+        description="Nicknamed \"The Military's Ostrich,\" this ship has what every general is the Celestial Armed Forces could want: 2 big cannons mounted directly to the front of the ship. Needless to say, when it comes to rear attacks, this ship has it's head in the sand.",
         stock=3,
         total_sold=0,
         price=470000

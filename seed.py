@@ -174,7 +174,7 @@ with app.app_context():
         manufacturer_id=2,
         category_id=5,
         size=765,
-        designer='William Schraeder',
+        designer='William Schrader',
         crew_cap=300,
         travel_range=3500,
         ftl=False,

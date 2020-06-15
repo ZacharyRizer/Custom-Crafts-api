@@ -41,7 +41,7 @@ class Query(graphene.ObjectType):
     order_item = graphene.Field(
         OrderItemType, order_item_id=graphene.Int())
 
-    reviews = graphene.List(ReviewType)
+    reviews = graphene.Field(graphene.List(ReviewType), ship_id=graphene.Int())
     review = graphene.Field(
         ReviewType, review_id=graphene.Int())
 
@@ -82,8 +82,11 @@ class Query(graphene.ObjectType):
     def resolve_order_item(self, info, order_item_id):
         return OrderItem.query.get(order_item_id)
 
-    def resolve_reviews(self, info, **kwargs):
-        return Review.query.all()
+    def resolve_reviews(self, info, ship_id, **kwargs):
+        return Review.query.filter(Review.ship_id == ship_id).all()
+        # return db.session.query(Review).options(joinedload
+        #                                         (Customer.name,
+        #                                          Customer.picture)).all()
 
     def resolve_review(self, info, review_id):
         return Review.query.get(review_id)
@@ -358,7 +361,6 @@ class DeleteReview(graphene.Mutation):
 class Mutation(graphene.ObjectType):
     add_customer = AddCustomer.Field()
     add_order = AddOrder.Field()
-    # add_order_item = AddOrderItem.Field()
     delete_order = DeleteOrder.Field()
     delete_order_item = DeleteOrderItem.Field()
     add_review = AddReview.Field()

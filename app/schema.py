@@ -83,7 +83,7 @@ class Query(graphene.ObjectType):
         return OrderItem.query.get(order_item_id)
 
     def resolve_reviews(self, info, ship_id, **kwargs):
-        return Review.query.filter(ship_id=ship_id).all()
+        return Review.query.filter(Review.ship_id == ship_id).all()
         # return db.session.query(Review).options(joinedload
         #                                         (Customer.name,
         #                                          Customer.picture)).all()

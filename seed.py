@@ -132,7 +132,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship7_orange.glb',
-        description='Ian\'s favorite toy as a little kid,
+        description="Ian\'s favorite toy as a little kid",
         stock=3,
         total_sold=0,
         price=75

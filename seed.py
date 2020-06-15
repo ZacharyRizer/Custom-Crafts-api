@@ -147,13 +147,8 @@ with app.app_context():
         travel_range=10,
         ftl=False,
         used=True,
-<<<<<<< HEAD
-        model_link='/spaceships/ship8_red.glb',
-        description='Big black circle, causes destruction',
-=======
         model_link='/spaceships/ship8_green.glb',
         description='Royal ambitions with medieval interior design',
->>>>>>> master
         stock=3,
         total_sold=0,
         price=67000
@@ -185,11 +180,7 @@ with app.app_context():
         ftl=False,
         used=True,
         model_link='/spaceships/ship10_red.glb',
-<<<<<<< HEAD
-        description='Big black circle, causes destruction',
-=======
         description='To the Moon and beyond! Robust structure resists solar flares',
->>>>>>> master
         stock=3,
         total_sold=0,
         price=435
@@ -237,11 +228,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship13_green.glb',
-<<<<<<< HEAD
-        description='Big black circle, causes destruction',
-=======
         description='For hikers through star trails',
->>>>>>> master
         stock=3,
         total_sold=0,
         price=9000
@@ -295,11 +282,7 @@ with app.app_context():
         price=999999
     )
     ship17 = Ship(
-<<<<<<< HEAD
-        name='Carini',
-=======
         name='Seraph',
->>>>>>> master
         manufacturer_id=5,
         category_id=5,
         size=3745,

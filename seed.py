@@ -36,7 +36,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship1_green.glb',
-        description="Nicknamed \"The Military's Ostrich,\" this ship has what every general is the Celestial Armed Forces could want: 2 big cannons mounted directly to the front of the ship. Needless to say, when it comes to rear attacks, this ship has it's head in the sand.",
+        description="Nicknamed \"The Military's Ostrich,\" this ship has what every general is the Celestial Armed Forces could want: 2 big cannons mounted directly to the front. Needless to say, when it comes to rear attacks, this ship has it's head in the sand.",
         stock=3,
         total_sold=0,
         price=470000
@@ -52,7 +52,7 @@ with app.app_context():
         ftl=False,
         used=True,
         model_link='/spaceships/ship2_red.glb',
-        description='Big black circle, causes destruction',
+        description="The premier transport ship of the Cerullian Star Airline, the only thing dreadful about the SS Dreadnought is the interior carpeting (and the layovers in Space Atlanta).",
         stock=3,
         total_sold=0,
         price=850000
@@ -68,7 +68,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship3_orange.glb',
-        description='Tyrannical cruiser that dictates its will upon all other spacecrafts',
+        description="The Milky Way's most robust asteroid cracker, the Despot has a reputation among many space miners as being a total slog to work on. * Custom Crafts cannot be held liable for anything that might emerge from said cracked asteroids.",
         stock=3,
         total_sold=0,
         price=150000
@@ -84,7 +84,7 @@ with app.app_context():
         ftl=False,
         used=True,
         model_link='/spaceships/ship4_blue.glb',
-        description='Scintillating through space, grasping unlicensed prey',
+        description='"There\'s nothing more terrifying than looking in your rear-view-monitor and seeing a metallic eagle\'s claw charging full speed at you!" - Aren Bellee (Designer)',
         stock=3,
         total_sold=0,
         price=8700
@@ -100,7 +100,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship5_red.glb',
-        description='Positive force of Yang',
+        description='The Proton was named for the high degree of luxury that it gives to customers. It was also named for the proton.',
         stock=3,
         total_sold=0,
         price=23000
@@ -116,7 +116,7 @@ with app.app_context():
         ftl=False,
         used=True,
         model_link='/spaceships/ship6_blue.glb',
-        description='The flying buzzer scanning for intruders',
+        description='Also known as "that one bug ship," the Trenxal is often compared to a bee, or a dragonfly, or some other kind of insect. It often transports desperate outlaws and the writers of cancelled TV shows.',
         stock=3,
         total_sold=0,
         price=657
@@ -132,7 +132,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship7_orange.glb',
-        description="Ian\'s favorite toy as a little kid",
+        description="We're not going to tell you that we found this ship floating in a gigantic space bathtub, but we're also going to tell you that that's exactly how we found it.",
         stock=3,
         total_sold=0,
         price=75
@@ -148,7 +148,7 @@ with app.app_context():
         ftl=False,
         used=True,
         model_link='/spaceships/ship8_green.glb',
-        description='Royal ambitions with medieval interior design',
+        description='"Aeethellwulf? Aaethelwulf? Aaattlewolf? EtherWolf? Either way, I \'m buying!" That\'s what you\'ll be saying, after you please please please take this ship and its confusing name off our lot.',
         stock=3,
         total_sold=0,
         price=67000
@@ -164,7 +164,7 @@ with app.app_context():
         ftl=True,
         used=False,
         model_link='/spaceships/ship9_orange.glb',
-        description='Rule the oceans of space as you swim through orbits',
+        description='Not just the king of the sea! The Poisiden flies like a boat and warps like a submarine. But DO NOT drive this thing into water. Those ads on the internet are fake, this thing is NOT waterproof.',
         stock=3,
         total_sold=0,
         price=8900
@@ -180,7 +180,7 @@ with app.app_context():
         ftl=False,
         used=True,
         model_link='/spaceships/ship10_red.glb',
-        description='To the Moon and beyond! Robust structure resists solar flares',
+        description='Bring a little history with you on the road! Each Apollo spaceship is made with real parts from the Apollo missions!',
         stock=3,
         total_sold=0,
         price=435

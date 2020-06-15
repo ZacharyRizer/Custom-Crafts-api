@@ -27,7 +27,7 @@ with app.app_context():
 
     ship1 = Ship(
         name='Frontier',
-        manufacturer_id=1,
+        manufacturer_id=5,
         category_id=1,
         size=8473,
         designer='T\'Maha',
@@ -43,7 +43,7 @@ with app.app_context():
     )
     ship2 = Ship(
         name='SS Dreadnought',
-        manufacturer_id=1,
+        manufacturer_id=4,
         category_id=2,
         size=4788,
         designer='Glama V\'Leeni',
@@ -59,7 +59,7 @@ with app.app_context():
     )
     ship3 = Ship(
         name='Despot',
-        manufacturer_id=1,
+        manufacturer_id=3,
         category_id=3,
         size=8993,
         designer='Kr\'Andull',
@@ -91,7 +91,7 @@ with app.app_context():
     )
     ship5 = Ship(
         name='Proton',
-        manufacturer_id=2,
+        manufacturer_id=1,
         category_id=5,
         size=945,
         designer='Zach Rizer',
@@ -107,7 +107,7 @@ with app.app_context():
     )
     ship6 = Ship(
         name='Trenxal',
-        manufacturer_id=2,
+        manufacturer_id=1,
         category_id=1,
         size=86,
         designer='Abdullah Wafy',
@@ -123,7 +123,7 @@ with app.app_context():
     )
     ship7 = Ship(
         name='The Rubber Ducky',
-        manufacturer_id=3,
+        manufacturer_id=5,
         category_id=2,
         size=10,
         designer='Ian Magenta',
@@ -155,7 +155,7 @@ with app.app_context():
     )
     ship9 = Ship(
         name='Poseidon',
-        manufacturer_id=3,
+        manufacturer_id=4,
         category_id=4,
         size=7564,
         designer='Sui Gwu-Pao',
@@ -171,7 +171,7 @@ with app.app_context():
     )
     ship10 = Ship(
         name='Apollo',
-        manufacturer_id=4,
+        manufacturer_id=2,
         category_id=5,
         size=765,
         designer='William Schraeder',
@@ -187,7 +187,7 @@ with app.app_context():
     )
     ship11 = Ship(
         name='Oberon Nova',
-        manufacturer_id=4,
+        manufacturer_id=5,
         category_id=1,
         size=276,
         designer='Abdullah Wafy',
@@ -219,7 +219,7 @@ with app.app_context():
     )
     ship13 = Ship(
         name='DH Enterprise',
-        manufacturer_id=5,
+        manufacturer_id=3,
         category_id=3,
         size=476,
         designer='Derrik Alder',
@@ -235,7 +235,7 @@ with app.app_context():
     )
     ship14 = Ship(
         name='Tycho',
-        manufacturer_id=5,
+        manufacturer_id=2,
         category_id=4,
         size=156,
         designer='Maddox Volante',
@@ -251,7 +251,7 @@ with app.app_context():
     )
     ship15 = Ship(
         name='The Leviathan',
-        manufacturer_id=5,
+        manufacturer_id=1,
         category_id=5,
         size=3745,
         designer='Abdullah Wafy',
@@ -267,8 +267,8 @@ with app.app_context():
     )
     ship16 = Ship(
         name='Pegasus',
-        manufacturer_id=5,
-        category_id=5,
+        manufacturer_id=2,
+        category_id=4,
         size=3745,
         designer='Abdullah Wafy',
         crew_cap=1000,
@@ -283,8 +283,8 @@ with app.app_context():
     )
     ship17 = Ship(
         name='Seraph',
-        manufacturer_id=5,
-        category_id=5,
+        manufacturer_id=1,
+        category_id=1,
         size=3745,
         designer='Abdullah Wafy',
         crew_cap=1000,
@@ -299,8 +299,8 @@ with app.app_context():
     )
     ship18 = Ship(
         name='Angel',
-        manufacturer_id=5,
-        category_id=5,
+        manufacturer_id=3,
+        category_id=2,
         size=3745,
         designer='Abdullah Wafy',
         crew_cap=1000,
@@ -315,8 +315,8 @@ with app.app_context():
     )
     ship19 = Ship(
         name='The Milano',
-        manufacturer_id=5,
-        category_id=5,
+        manufacturer_id=4,
+        category_id=3,
         size=3745,
         designer='Valdis Simril',
         crew_cap=1000,

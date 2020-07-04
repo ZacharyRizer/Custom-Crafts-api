@@ -1,3 +1,5 @@
 FLASK_ENV=development
 SECRET_KEY=secrety_key
 DATABASE_URL=sample_database_url
+AWS_KEY=sampleKey
+AWS_BUCKET=custom-crafts-inventory

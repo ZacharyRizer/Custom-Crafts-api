@@ -21,6 +21,7 @@ graphene-sqlalchemy = "*"
 flask-graphql = "*"
 graphene-sqlalchemy-filter = "*"
 gunicorn = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.8"

@@ -15,14 +15,17 @@ def create_app():
     db.init_app(app)
     Migrate(app, db)
 
+    @app.route('/', methods=["GET"])
+    def wakeDyno():
+        return 'Waking those Dinosaurs'
 
     app.add_url_rule('/graphql', view_func=GraphQLView.as_view('graphql',
                                                             schema=schema,
                                                             graphiql=True))
 
+
+
     # Error Handler
-
-
     @app.errorhandler(AuthError)
     def handle_auth_error(ex):
         response = jsonify(ex.error)
@@ -31,26 +34,6 @@ def create_app():
 
     return app
 
-
-# This doesn't need authentication
-
-
-# @app.route("/api/public")
-# @cross_origin(headers=["Content-Type", "Authorization"])
-# def public():
-#     response = "Hello from a public endpoint! You don't need to be authenticated to see this."
-#     return jsonify(message=response)
-
-
-# # This needs authentication
-
-
-# @app.route("/api/private")
-# @cross_origin(headers=["Content-Type", "Authorization"])
-# @requires_auth
-# def private():
-#     response = "Hello from a private endpoint! You need to be authenticated to see this."
-#     return jsonify(message=response)
 
 
 
